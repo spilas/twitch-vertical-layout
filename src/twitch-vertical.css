@@ -113,25 +113,23 @@
     max-height: none !important;
   }
 
-  html.tvl-portrait-layout .channel-root__right-column *,
-  html.tvl-portrait-layout [data-a-target="right-column-chat-bar"] *,
-  html.tvl-portrait-layout [data-a-target="chat-room-component-layout"] * {
+  html.tvl-portrait-layout .channel-root__right-column > *,
+  html.tvl-portrait-layout [data-a-target="right-column-chat-bar"] > *,
+  html.tvl-portrait-layout [data-a-target="chat-room-component-layout"],
+  html.tvl-portrait-layout .chat-room,
+  html.tvl-portrait-layout .stream-chat,
+  html.tvl-portrait-layout .chat-shell,
+  html.tvl-portrait-layout .chat-list,
+  html.tvl-portrait-layout .chat-scrollable-area__message-container,
+  html.tvl-portrait-layout [data-a-target="chat-scroller"] {
+    width: 100% !important;
+    min-width: 0 !important;
     max-width: none !important;
   }
 
-  html.tvl-portrait-layout .channel-root__right-column > *,
-  html.tvl-portrait-layout [data-a-target="right-column-chat-bar"] > *,
-  html.tvl-portrait-layout [data-a-target="chat-room-component-layout"] > *,
-  html.tvl-portrait-layout .chat-room > *,
-  html.tvl-portrait-layout .stream-chat > *,
-  html.tvl-portrait-layout .chat-shell > *,
-  html.tvl-portrait-layout .chat-list,
-  html.tvl-portrait-layout .chat-scrollable-area__message-container,
-  html.tvl-portrait-layout [data-a-target="chat-scroller"],
   html.tvl-portrait-layout [data-a-target="chat-input"],
   html.tvl-portrait-layout [data-a-target="chat-send-button"] {
-    width: 100% !important;
-    min-width: 0 !important;
+    pointer-events: auto !important;
   }
 
   html.tvl-portrait-layout .video-player,
