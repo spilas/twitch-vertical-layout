@@ -48,6 +48,7 @@
     min-width: 0 !important;
     max-width: none !important;
     height: var(--tvl-player-height) !important;
+    pointer-events: none !important;
   }
 
   html.tvl-portrait-layout .channel-root__player,
@@ -57,7 +58,7 @@
     right: auto !important;
     top: auto !important;
     bottom: 0 !important;
-    z-index: 9998 !important;
+    z-index: 2147483645 !important;
     display: block !important;
     width: var(--tvl-content-width) !important;
     height: var(--tvl-player-height) !important;
@@ -65,6 +66,12 @@
     min-height: 0 !important;
     overflow: hidden !important;
     transform: none !important;
+    pointer-events: auto !important;
+  }
+
+  html.tvl-portrait-layout .channel-root__player *,
+  html.tvl-portrait-layout .persistent-player * {
+    pointer-events: auto !important;
   }
 
   html.tvl-portrait-layout [data-a-target="video-player"] {
@@ -89,7 +96,7 @@
     right: auto !important;
     top: var(--tvl-header-height) !important;
     bottom: auto !important;
-    z-index: 9997 !important;
+    z-index: 2147483646 !important;
     display: flex !important;
     width: var(--tvl-content-width) !important;
     min-width: 0 !important;
@@ -99,6 +106,16 @@
     border-left: 0 !important;
     border-bottom: 1px solid var(--color-border-base, #2f2f35) !important;
     transform: none !important;
+    box-sizing: border-box !important;
+    isolation: isolate !important;
+    pointer-events: auto !important;
+  }
+
+  html.tvl-portrait-layout .tvl-chat-fill {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
   }
 
   html.tvl-portrait-layout [data-a-target="chat-room-component-layout"],
@@ -128,7 +145,11 @@
   }
 
   html.tvl-portrait-layout [data-a-target="chat-input"],
-  html.tvl-portrait-layout [data-a-target="chat-send-button"] {
+  html.tvl-portrait-layout [data-a-target="chat-send-button"],
+  html.tvl-portrait-layout .channel-root__right-column [contenteditable="true"],
+  html.tvl-portrait-layout [data-a-target="right-column-chat-bar"] [contenteditable="true"] {
+    position: relative !important;
+    z-index: 2 !important;
     pointer-events: auto !important;
   }
 
