@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Twitch Vertical Layout",
+  "version": "0.1.0",
+  "description": "Stacks Twitch chat above the stream on portrait displays.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.twitch.tv/*",
+        "https://twitch.tv/*"
+      ],
+      "js": [
+        "src/content.js"
+      ],
+      "css": [
+        "src/twitch-vertical.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

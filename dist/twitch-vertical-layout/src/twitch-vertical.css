@@ -1,0 +1,148 @@
+@media (orientation: portrait) {
+  html.tvl-portrait-layout {
+    --tvl-header-height: 5rem;
+    --tvl-player-height: min(42vh, 56.25vw);
+    --tvl-content-left: 0px;
+    --tvl-content-width: 100vw;
+    --tvl-chat-height: calc(100vh - var(--tvl-header-height) - var(--tvl-player-height));
+  }
+
+  html.tvl-portrait-layout,
+  html.tvl-portrait-layout body,
+  html.tvl-portrait-layout #root,
+  html.tvl-portrait-layout .twilight-main {
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
+
+  html.tvl-portrait-layout .side-nav,
+  html.tvl-portrait-layout .side-nav--expanded,
+  html.tvl-portrait-layout [data-a-target="side-nav-bar"],
+  html.tvl-portrait-layout [data-a-target="side-nav-show-more-button"],
+  html.tvl-portrait-layout nav[aria-label="Following channels"] {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+  }
+
+  html.tvl-portrait-layout main,
+  html.tvl-portrait-layout .twilight-main,
+  html.tvl-portrait-layout .twilight-main > div {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  html.tvl-portrait-layout .channel-root,
+  html.tvl-portrait-layout [data-a-target="channel-root"],
+  html.tvl-portrait-layout .channel-root__content {
+    width: var(--tvl-content-width) !important;
+    height: calc(100vh - var(--tvl-header-height)) !important;
+    max-width: none !important;
+    overflow: hidden !important;
+  }
+
+  html.tvl-portrait-layout .channel-root__main {
+    position: static !important;
+    width: var(--tvl-content-width) !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: var(--tvl-player-height) !important;
+  }
+
+  html.tvl-portrait-layout .channel-root__player,
+  html.tvl-portrait-layout .persistent-player {
+    position: fixed !important;
+    left: var(--tvl-content-left) !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: 0 !important;
+    z-index: 9998 !important;
+    display: block !important;
+    width: var(--tvl-content-width) !important;
+    height: var(--tvl-player-height) !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    transform: none !important;
+  }
+
+  html.tvl-portrait-layout [data-a-target="video-player"] {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+  }
+
+  html.tvl-portrait-layout .channel-root__info,
+  html.tvl-portrait-layout .channel-root__lower-watch,
+  html.tvl-portrait-layout .channel-info-content,
+  html.tvl-portrait-layout [data-a-target="channel-info-content"],
+  html.tvl-portrait-layout [data-a-target="about-panel"] {
+    display: none !important;
+  }
+
+  html.tvl-portrait-layout .channel-root__right-column,
+  html.tvl-portrait-layout [data-a-target="right-column-chat-bar"] {
+    position: fixed !important;
+    left: var(--tvl-content-left) !important;
+    right: auto !important;
+    top: var(--tvl-header-height) !important;
+    bottom: auto !important;
+    z-index: 9997 !important;
+    display: flex !important;
+    width: var(--tvl-content-width) !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: var(--tvl-chat-height) !important;
+    min-height: 0 !important;
+    border-left: 0 !important;
+    border-bottom: 1px solid var(--color-border-base, #2f2f35) !important;
+    transform: none !important;
+  }
+
+  html.tvl-portrait-layout [data-a-target="chat-room-component-layout"],
+  html.tvl-portrait-layout .chat-room,
+  html.tvl-portrait-layout .stream-chat,
+  html.tvl-portrait-layout .chat-shell {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  html.tvl-portrait-layout .channel-root__right-column *,
+  html.tvl-portrait-layout [data-a-target="right-column-chat-bar"] *,
+  html.tvl-portrait-layout [data-a-target="chat-room-component-layout"] * {
+    max-width: none !important;
+  }
+
+  html.tvl-portrait-layout .channel-root__right-column > *,
+  html.tvl-portrait-layout [data-a-target="right-column-chat-bar"] > *,
+  html.tvl-portrait-layout [data-a-target="chat-room-component-layout"] > *,
+  html.tvl-portrait-layout .chat-room > *,
+  html.tvl-portrait-layout .stream-chat > *,
+  html.tvl-portrait-layout .chat-shell > *,
+  html.tvl-portrait-layout .chat-list,
+  html.tvl-portrait-layout .chat-scrollable-area__message-container,
+  html.tvl-portrait-layout [data-a-target="chat-scroller"],
+  html.tvl-portrait-layout [data-a-target="chat-input"],
+  html.tvl-portrait-layout [data-a-target="chat-send-button"] {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  html.tvl-portrait-layout .video-player,
+  html.tvl-portrait-layout .video-player__container,
+  html.tvl-portrait-layout .video-player__overlay,
+  html.tvl-portrait-layout video {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  html.tvl-portrait-layout video {
+    object-fit: contain !important;
+  }
+}
