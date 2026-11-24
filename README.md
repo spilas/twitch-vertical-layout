@@ -16,3 +16,11 @@
 - Twitch の配信ページで、チャット欄が上、配信画面が下に表示されます。
 - 左のフォロー中バーは非表示になり、チャット欄と配信画面は全幅表示になります。
 - 配信下の概要欄などは、縦配置で見やすくするため非表示にしています。
+
+## 回帰テスト
+
+Chrome のヘッドレスモードで、チャット入力、全幅表示、再生・一時停止、音量操作を検査できます。
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tests\run-harness.ps1
+```

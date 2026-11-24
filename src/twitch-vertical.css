@@ -48,7 +48,6 @@
     min-width: 0 !important;
     max-width: none !important;
     height: var(--tvl-player-height) !important;
-    pointer-events: none !important;
   }
 
   html.tvl-portrait-layout .channel-root__player,
@@ -66,12 +65,6 @@
     min-height: 0 !important;
     overflow: hidden !important;
     transform: none !important;
-    pointer-events: auto !important;
-  }
-
-  html.tvl-portrait-layout .channel-root__player *,
-  html.tvl-portrait-layout .persistent-player * {
-    pointer-events: auto !important;
   }
 
   html.tvl-portrait-layout [data-a-target="video-player"] {

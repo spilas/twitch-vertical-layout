@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Twitch Vertical Layout harness</title>
+    <link rel="stylesheet" href="../src/twitch-vertical.css">
+    <style>
+      * { box-sizing: border-box; }
+      html, body { margin: 0; background: #0e0e10; color: #efeff1; font: 16px sans-serif; }
+      .top-nav { height: 5rem; background: #18181b; }
+      .side-nav { position: fixed; top: 5rem; bottom: 0; width: 15rem; background: #26262c; }
+      .channel-root { margin-left: 15rem; }
+      .channel-root__main { position: relative; }
+      .channel-root__player { background: #090909; }
+      [data-a-target="video-player"] { position: relative; background: #17171b; }
+      .player-controls-portal {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 2147483647;
+        display: flex;
+        gap: 0.5rem;
+      }
+      button, input, [contenteditable="true"] { min-height: 2.5rem; }
+      .channel-root__right-column { background: #18181b; }
+      .chat-shell-limit { width: 34rem; max-width: 34rem; }
+      .chat-log { height: 10rem; }
+      .chat-composer { display: flex; width: 100%; gap: 0.5rem; padding: 0.5rem; }
+      [data-a-target="chat-input"] { flex: 1 1 auto; border: 1px solid #777; padding: 0.5rem; }
+      [data-a-target="chat-send-button"] { flex: 0 0 auto; width: auto; }
+      #harness-result { position: fixed; left: 0; top: 0; z-index: 2147483647; }
+    </style>
+  </head>
+  <body>
+    <div class="top-nav"></div>
+    <nav class="side-nav" data-a-target="side-nav-bar"></nav>
+    <main>
+      <div class="channel-root" data-a-target="channel-root">
+        <div class="channel-root__main">
+          <div class="channel-root__player">
+            <div data-a-target="video-player"></div>
+          </div>
+          <div class="player-controls-portal">
+            <button id="pause-control" type="button">Pause</button>
+            <button id="volume-control" type="button">Volume</button>
+            <input id="volume-slider" type="range" min="0" max="100" value="50" aria-label="Volume slider">
+          </div>
+        </div>
+        <aside class="channel-root__right-column" data-a-target="right-column-chat-bar">
+          <div class="chat-shell-limit">
+            <div class="stream-chat">
+              <section class="chat-room" data-a-target="chat-room-component-layout">
+                <div class="chat-log" data-a-target="chat-scroller">Chat messages</div>
+                <div class="chat-composer">
+                  <div data-a-target="chat-input" contenteditable="true">Message</div>
+                  <button data-a-target="chat-send-button" type="button">Send</button>
+                </div>
+              </section>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    <output id="harness-result">Running</output>
+    <script src="../src/content.js"></script>
+    <script>
+      (() => {
+        const checks = [];
+        const record = (name, pass, detail = "") => checks.push({ name, pass, detail });
+        const hitTest = (element) => {
+          const rect = element.getBoundingClientRect();
+          return document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        };
+
+        window.addEventListener("load", () => {
+          setTimeout(() => {
+            const chatColumn = document.querySelector(".channel-root__right-column");
+            const chatInput = document.querySelector("[data-a-target='chat-input']");
+            const sendButton = document.querySelector("[data-a-target='chat-send-button']");
+            const pauseButton = document.querySelector("#pause-control");
+            const volumeButton = document.querySelector("#volume-control");
+            const volumeSlider = document.querySelector("#volume-slider");
+            const sideNav = document.querySelector(".side-nav");
+
+            for (const control of [pauseButton, volumeButton, volumeSlider]) {
+              control.addEventListener("click", () => {
+                control.dataset.clicked = "true";
+              });
+            }
+
+            const activateThroughHitTest = (control) => {
+              const hit = hitTest(control);
+              if (!control.contains(hit)) {
+                return false;
+              }
+              hit.click();
+              return control.dataset.clicked === "true";
+            };
+
+            record("portrait layout enabled", document.documentElement.classList.contains("tvl-portrait-layout"));
+            record("side navigation hidden", getComputedStyle(sideNav).display === "none");
+            record(
+              "chat fills viewport width",
+              Math.abs(chatColumn.getBoundingClientRect().width - innerWidth) <= 1,
+              `${chatColumn.getBoundingClientRect().width}/${innerWidth}`
+            );
+            record("chat input receives pointer", chatInput.contains(hitTest(chatInput)));
+            record("send button keeps intrinsic width", sendButton.getBoundingClientRect().width < innerWidth / 2);
+            record("pause control receives click", activateThroughHitTest(pauseButton));
+            record("volume control receives click", activateThroughHitTest(volumeButton));
+            record("volume slider receives click", activateThroughHitTest(volumeSlider));
+
+            const failures = checks.filter((check) => !check.pass);
+            const result = document.querySelector("#harness-result");
+            result.dataset.status = failures.length === 0 ? "pass" : "fail";
+            result.textContent = JSON.stringify(checks);
+            document.title = failures.length === 0 ? "HARNESS PASS" : "HARNESS FAIL";
+          }, 100);
+        });
+      })();
+    </script>
+  </body>
+</html>
